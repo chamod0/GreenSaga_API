@@ -27,7 +27,9 @@ namespace GreenSagaAPI.Controllers
         {
             if (projectObj == null)
                 return BadRequest();
-
+            //check user name
+            if (await CheckProjectNameExistAsync(projectObj.ProjectName))
+                return BadRequest(new { Message = projectObj.ProjectName + " Project Name Already Exist! " });
             await _authContext.Projects.AddAsync(projectObj);
             await _authContext.SaveChangesAsync();
             return Ok(new
@@ -36,7 +38,8 @@ namespace GreenSagaAPI.Controllers
             });
 
         }
-
+        private Task<bool> CheckProjectNameExistAsync(string projectName)
+             => _authContext.Projects.AnyAsync(x => x.ProjectName == projectName);
 
         [HttpGet("project/{id?}/{userID}")]
         public async Task<ActionResult<cultivationProjects>> project(int? id,int userID)
