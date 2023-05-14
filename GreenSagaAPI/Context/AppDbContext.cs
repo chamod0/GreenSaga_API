@@ -11,9 +11,11 @@ namespace GreenSagaAPI.Context
 
         }
         public DbSet<User> Users { get; set; }
+        public DbSet<cultivationProjects> Projects { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().ToTable("users");
+            modelBuilder.Entity<cultivationProjects>().ToTable("Projects");
         }
     }
 }
