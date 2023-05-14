@@ -202,25 +202,6 @@ namespace GreenSagaAPI.Controllers
         }
 
 
-        [HttpGet("project/{id?}")]
-        public IActionResult project(int? id)
-        {
-            var projects = _projectService.GetCultivationProjects().Where(p => p.Id == id);
-            if (id is null)
-            {
-                return BadRequest("can't pass null values");
-            }
-                
-            else if(id == 0){
-                return Ok(_projectService.GetCultivationProjects());
-            }
-            else {
-                var project = _projectService.GetCultivationProjects().Where(p => p.Id == id);
-                return Ok(project);
-            }    
-              
-          
-        }
 
         
 
