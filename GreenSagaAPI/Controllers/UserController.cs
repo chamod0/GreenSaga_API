@@ -208,7 +208,7 @@ namespace GreenSagaAPI.Controllers
             var projects = _projectService.GetCultivationProjects().Where(p => p.Id == id);
             if (id is null)
             {
-                return BadRequest("can't pass null value");
+                return BadRequest("can't pass null values");
             }
                 
             else if(id == 0){
