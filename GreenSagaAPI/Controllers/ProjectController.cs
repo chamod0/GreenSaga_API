@@ -41,7 +41,7 @@ namespace GreenSagaAPI.Controllers
         private Task<bool> CheckProjectNameExistAsync(string projectName)
              => _authContext.Projects.AnyAsync(x => x.ProjectName == projectName);
 
-        [HttpGet("project/{id?}/{userID}")]
+        [HttpGet("grtProject/{id?}/{userID}")]
         public async Task<ActionResult<cultivationProjects>> project(int? id,int userID)
         {
            // var projects = _projectService.GetCultivationProjects().Where(p => p.Id == id);

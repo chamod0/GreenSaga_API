@@ -24,13 +24,13 @@ namespace GreenSagaAPI.Controllers
     {
         private readonly AppDbContext _authContext;
 
-        private projectService _projectService;
+       // private projectService _projectService;
 
-        public UserController()
-        {
-            _projectService = new projectService();
+        //public UserController()
+        //{
+        //    _projectService = new projectService();
 
-        }
+        //}
         public UserController(AppDbContext appDbContext) {
 
             _authContext = appDbContext;
@@ -118,6 +118,7 @@ namespace GreenSagaAPI.Controllers
             var key = Encoding.ASCII.GetBytes("veryverysecret.....");
             var identity = new ClaimsIdentity(new Claim[]
             {
+                new Claim(ClaimTypes.SerialNumber, $"{user.ID}"),
                 new Claim(ClaimTypes.Role, user.Role),
                 new Claim(ClaimTypes.Name,$"{user.UserName}")
 
