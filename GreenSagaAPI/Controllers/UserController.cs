@@ -1,6 +1,7 @@
 ﻿using Azure.Core;
 using GreenSagaAPI.Context;
 using GreenSagaAPI.Helpers;
+using GreenSagaAPI.Migrations;
 using GreenSagaAPI.Models;
 using GreenSagaAPI.Models.Dto;
 using GreenSagaAPI.Service;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -24,13 +26,13 @@ namespace GreenSagaAPI.Controllers
     {
         private readonly AppDbContext _authContext;
 
-        private projectService _projectService;
+       // private projectService _projectService;
 
-        public UserController()
-        {
-            _projectService = new projectService();
+        //public UserController()
+        //{
+        //    _projectService = new projectService();
 
-        }
+        //}
         public UserController(AppDbContext appDbContext) {
 
             _authContext = appDbContext;
@@ -56,7 +58,7 @@ namespace GreenSagaAPI.Controllers
             var newAccessToken = user.Token;
             var newRefreshToken = CreateRefreshToken();
             user.RefreshToken= newRefreshToken;
-            user.RefreshTokenExpiryTime = DateTime.Now.AddDays(5);
+         //   user.RefreshTokenExpiryTime = DateTime.Now.AddDays(5);
             await _authContext.SaveChangesAsync();
             return Ok(new TokenApiDto()
             {
@@ -118,6 +120,7 @@ namespace GreenSagaAPI.Controllers
             var key = Encoding.ASCII.GetBytes("veryverysecret.....");
             var identity = new ClaimsIdentity(new Claim[]
             {
+                new Claim(ClaimTypes.SerialNumber, $"{user.ID}"),
                 new Claim(ClaimTypes.Role, user.Role),
                 new Claim(ClaimTypes.Name,$"{user.UserName}")
 
@@ -202,8 +205,34 @@ namespace GreenSagaAPI.Controllers
         }
 
 
+        [HttpGet("getUserByRole/{id?}/{roleID}")]
+        public async Task<ActionResult<cultivationProjects>> getUserByRole(int? id, String roleID)
+        {
+            // var projects = _projectService.GetCultivationProjects().Where(p => p.Id == id);
+            if (id is null)
+            {
+                return BadRequest("can't pass null values");
+            }
 
-        
+            else if (id == 0)
+            {
+                return Ok(await _authContext.Users.Where(p => p.Role == roleID).Select(p => new { p.ID, p.FirstName, p.LastName }).ToListAsync());
+            }
+            else
+            {
+
+                var users =  await _authContext.Users.Where(p => p.Role == roleID && p.Role == roleID).Select(p => new { p.ID, p.FirstName , p.LastName }).ToListAsync();
+              //  var project = await _authContext.Projects.Where(p => p.Id == id && p.UserID == userID).ToListAsync();
+
+                return Ok(users);
+            }
+
+
+        }
+
+
+
+
 
     }
 }

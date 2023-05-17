@@ -14,7 +14,7 @@ namespace GreenSagaAPI.Service
                 ProjectCode = "a",
                 ProjectName = "aaa",
                 Description = "aaaaaa",
-                CreateAt = DateTime.Now,
+                //CreateAt = DateTime.Now,
                 Createby = 1,
                 Status = projectStatus.Inprogres
 
@@ -27,7 +27,7 @@ namespace GreenSagaAPI.Service
                 ProjectCode = "da",
                 ProjectName = "aaffa",
                 Description = "aaa",
-                CreateAt = DateTime.Now,
+              //  CreateAt = DateTime.Now,
                 Createby = 1,
                 Status = projectStatus.Inprogres
 

@@ -76,14 +76,20 @@ namespace GreenSagaAPI.Migrations
                     b.Property<int>("Createby")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("DeleteAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DeleteBy")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ModifyAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("ModifyBy")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("ModifyBy")
+                        .HasColumnType("int");
 
                     b.Property<string>("ProjectCode")
                         .HasColumnType("nvarchar(max)");
@@ -92,6 +98,9 @@ namespace GreenSagaAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SupervisorID")
                         .HasColumnType("int");
 
                     b.Property<int>("UserID")
