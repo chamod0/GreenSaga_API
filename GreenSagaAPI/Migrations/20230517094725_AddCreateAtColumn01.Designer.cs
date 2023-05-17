@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenSagaAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230501214247_adda")]
-    partial class adda
+    [Migration("20230517094725_AddCreateAtColumn01")]
+    partial class AddCreateAtColumn01
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,6 +63,55 @@ namespace GreenSagaAPI.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("users", (string)null);
+                });
+
+            modelBuilder.Entity("GreenSagaAPI.Models.cultivationProjects", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Createby")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DeleteAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DeleteBy")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifyAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ModifyBy")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProjectCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProjectName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SupervisorID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Projects", (string)null);
                 });
 #pragma warning restore 612, 618
         }

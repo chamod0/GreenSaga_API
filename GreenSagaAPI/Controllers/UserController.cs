@@ -58,7 +58,7 @@ namespace GreenSagaAPI.Controllers
             var newAccessToken = user.Token;
             var newRefreshToken = CreateRefreshToken();
             user.RefreshToken= newRefreshToken;
-            user.RefreshTokenExpiryTime = DateTime.Now.AddDays(5);
+         //   user.RefreshTokenExpiryTime = DateTime.Now.AddDays(5);
             await _authContext.SaveChangesAsync();
             return Ok(new TokenApiDto()
             {
