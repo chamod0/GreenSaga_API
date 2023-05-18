@@ -4,6 +4,7 @@ using GreenSagaAPI.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenSagaAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230518191231_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -177,14 +180,14 @@ namespace GreenSagaAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTimeOffset>("CreateAt")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Createby")
                         .HasColumnType("int");
 
-                    b.Property<DateTimeOffset>("DeleteAt")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("DeleteAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("DeleteBy")
                         .HasColumnType("int");
@@ -192,8 +195,8 @@ namespace GreenSagaAPI.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTimeOffset>("ModifyAt")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("ModifyAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("ModifyBy")
                         .HasColumnType("int");
