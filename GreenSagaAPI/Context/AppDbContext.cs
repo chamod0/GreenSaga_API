@@ -1,6 +1,8 @@
-﻿using GreenSagaAPI.Models;
+﻿using GreenSagaAPI.Migrations;
+using GreenSagaAPI.Models;
 using GreenSagaAPI.Models.partial;
 using Microsoft.EntityFrameworkCore;
+
 
 namespace GreenSagaAPI.Context
 {
@@ -14,13 +16,14 @@ namespace GreenSagaAPI.Context
         public DbSet<User> Users { get; set; }
         public DbSet<cultivationProjects> Projects { get; set; }
         public DbSet<ProjecwithSupervisor> ProjecwithSupervisor { get; set; }
-        
+        public DbSet<TimeLineBox> TimeLineBox { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().ToTable("users");
             modelBuilder.Entity<cultivationProjects>().ToTable("Projects");
-            modelBuilder.Entity<ProjecwithSupervisor>().ToTable("ProjecwithSupervisor");
-            
+           
+            modelBuilder.Entity<TimeLineBox>().ToTable("Timeline");
+
         }
     }
 }
