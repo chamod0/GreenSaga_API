@@ -14,6 +14,8 @@ namespace GreenSagaAPI.Models
         public string Image { get; set; }
         public Boolean IsActive { get; set; }
         public DateTimeOffset CreateAt { get; set; }
+        public DateTimeOffset? StartDate { get; set; }
+        public DateTimeOffset? EndDate { get; set; }
         public int Createby { get; set; }
         public int UserID { get; set; }
         public DateTimeOffset ModifyAt { get; set; }

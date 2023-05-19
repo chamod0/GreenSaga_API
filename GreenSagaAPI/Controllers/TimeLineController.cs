@@ -80,5 +80,28 @@ namespace GreenSagaAPI.Controllers
             }
 
         }
+        [HttpDelete]
+        [Route(("deleteTimeLine/{id:int}"))]
+        public async Task<IActionResult> deleteTimeLine([FromRoute] int id)
+        {
+            try
+            {
+                var timeLineBoxDelete = await _authContext.TimeLineBox.FirstOrDefaultAsync(p => p.Id == id);
+
+                if (timeLineBoxDelete != null)
+                {
+                    _authContext.Remove(timeLineBoxDelete);
+                    await _authContext.SaveChangesAsync();
+                    return Ok(timeLineBoxDelete);
+                }
+
+                return NotFound($"Projects with Id = {id} not found");
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error deleting data");
+            }
+        }
     }
 }

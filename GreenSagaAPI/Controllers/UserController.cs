@@ -130,7 +130,7 @@ namespace GreenSagaAPI.Controllers
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = identity,
-                Expires = DateTime.Now.AddSeconds(10),
+                Expires = DateTime.Now.AddSeconds(1000),
                 SigningCredentials = credentials
 
             };
@@ -220,17 +220,36 @@ namespace GreenSagaAPI.Controllers
             }
             else
             {
-
                 var users =  await _authContext.Users.Where(p => p.Role == roleID && p.Role == roleID).Select(p => new { p.ID, p.FirstName , p.LastName }).ToListAsync();
               //  var project = await _authContext.Projects.Where(p => p.Id == id && p.UserID == userID).ToListAsync();
 
                 return Ok(users);
             }
 
-
         }
 
+        [HttpGet("getUserByID/{id?}")]
+        public async Task<ActionResult<User>> getUserByID(int? id)
+        {
+            // var projects = _projectService.GetCultivationProjects().Where(p => p.Id == id);
+            if (id is null)
+            {
+                return BadRequest("can't pass null values");
+            }
 
+            else if (id == 0)
+            {
+                return Ok(await _authContext.Users.Where(p => p.ID == id).ToListAsync());
+            }
+            else
+            {
+                var users =  await _authContext.Users.Where(p => p.ID == id).ToListAsync();
+                //  var project = await _authContext.Projects.Where(p => p.Id == id && p.UserID == userID).ToListAsync();
+
+                return Ok(users);
+            }
+
+        }
 
 
 

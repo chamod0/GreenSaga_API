@@ -95,6 +95,56 @@ namespace GreenSagaAPI.Controllers
 
 
         }
+        [HttpDelete]
+        [Route(("deleteProjects/{id:int}"))]
+        public async Task<IActionResult> DeleteProjects([FromRoute]int id)
+        {
+            try
+            {
+                var projectDelete = await _authContext.Projects.FirstOrDefaultAsync(p => p.Id == id);
+
+                if (projectDelete != null)
+                {
+                    _authContext.Remove(projectDelete);
+                    await _authContext.SaveChangesAsync();
+                    return Ok(projectDelete);
+                }
+
+                  return NotFound($"Projects with Id = {id} not found");
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error deleting data");
+            }
+        }
+        [HttpPut]
+        [Route(("updateProjects/{id:int}"))]
+        public async Task<IActionResult> UpdateProjects([FromRoute] int id, [FromBody] cultivationProjects cultivationProjects )
+        {
+            try
+            {
+                var projectUpdate = await _authContext.Projects.FirstOrDefaultAsync(p => p.Id == id);
+
+                if (projectUpdate != null)
+
+                {
+                    projectUpdate.ProjectName = cultivationProjects.ProjectName;
+                    projectUpdate.Description = cultivationProjects.Description;
+                    projectUpdate.SupervisorID = cultivationProjects.SupervisorID;
+            
+                    await _authContext.SaveChangesAsync();
+                    return Ok(projectUpdate);
+                }
+
+                return NotFound($"Projects with Id = {id} not found");
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error deleting data");
+            }
+        }
     }
 }
 
