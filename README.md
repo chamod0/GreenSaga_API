@@ -1,10 +1,10 @@
 # GreenSaga_API
 This project is a .NET Core API with login, register, and JWT token-based authentication.
 
-Description
+# Description
 The project provides a RESTful API built with .NET Core that enables user registration, login, and authentication using JWT tokens. It includes endpoints for user management and secure access to protected resources.
 
-Features
+# Features
 User registration: Allow users to create an account by providing necessary details.
 User login: Authenticate users with their credentials and generate JWT tokens.
 JWT token authentication: Secure API endpoints using JWT token-based authentication.
