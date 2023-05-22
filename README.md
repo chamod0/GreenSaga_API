@@ -13,9 +13,6 @@ Logging: Implement logging for capturing application events and errors.
 Installation
 Clone the repository:
 
-bash
-Copy code
-git clone https://github.com/your-username/your-repo.git
 Navigate to the project directory:
 
 bash
