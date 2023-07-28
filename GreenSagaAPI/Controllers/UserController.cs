@@ -26,13 +26,7 @@ namespace GreenSagaAPI.Controllers
     {
         private readonly AppDbContext _authContext;
 
-       // private projectService _projectService;
-
-        //public UserController()
-        //{
-        //    _projectService = new projectService();
-
-        //}
+      
         public UserController(AppDbContext appDbContext) {
 
             _authContext = appDbContext;
@@ -208,7 +202,7 @@ namespace GreenSagaAPI.Controllers
         [HttpGet("getUserByRole/{id?}/{roleID}")]
         public async Task<ActionResult<cultivationProjects>> getUserByRole(int? id, String roleID)
         {
-            // var projects = _projectService.GetCultivationProjects().Where(p => p.Id == id);
+            
             if (id is null)
             {
                 return BadRequest("can't pass null values");
@@ -220,8 +214,8 @@ namespace GreenSagaAPI.Controllers
             }
             else
             {
-                var users =  await _authContext.Users.Where(p => p.Role == roleID && p.Role == roleID).Select(p => new { p.ID, p.FirstName , p.LastName }).ToListAsync();
-              //  var project = await _authContext.Projects.Where(p => p.Id == id && p.UserID == userID).ToListAsync();
+                var users =  await _authContext.Users.Where(p => p.Role == roleID && p.ID == id).Select(p => new { p.ID, p.FirstName , p.LastName }).ToListAsync();
+      
 
                 return Ok(users);
             }
@@ -244,7 +238,7 @@ namespace GreenSagaAPI.Controllers
             else
             {
                 var users =  await _authContext.Users.Where(p => p.ID == id).ToListAsync();
-                //  var project = await _authContext.Projects.Where(p => p.Id == id && p.UserID == userID).ToListAsync();
+               
 
                 return Ok(users);
             }
