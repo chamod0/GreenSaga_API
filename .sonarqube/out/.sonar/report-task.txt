@@ -1,0 +1,6 @@
+projectKey=GreenSagaAPI_Teat
+serverUrl=http://localhost:9000
+serverVersion=10.0.0.68432
+dashboardUrl=http://localhost:9000/dashboard?id=GreenSagaAPI_Teat
+ceTaskId=AYhEDgg8xt_LSnATSlow
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYhEDgg8xt_LSnATSlow
